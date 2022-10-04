@@ -259,5 +259,5 @@ topology:
 # HOST3            #
 ####################
     - endpoints: ["HOST3:eth1", "IDFBasement-SW1:et5"]
-    - endpoints: ["HOST3:eth2", "IDFBasement-SW2:et5"]
+    - endpoints: ["HOST3:eth2", "IDFBasement-SW1:et6"]
                                                   
