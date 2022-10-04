@@ -190,58 +190,58 @@ topology:
 # AGG-SW1 to IDFA-SW1   #
 #########################
 
-    - endpoints: ["AGG-SW1:et1", "IDFA-SW1:et1"]
+    - endpoints: ["AGG-SW1:et1", "IDFA-SW1:et97"]
 
 #########################
-# AGG-SW2 to IDFA-SW1   #
+# AGG-SW2 to IDFA-SW2   #
 #########################
 
-    - endpoints: ["AGG-SW2:et1", "IDFA-SW2:et1"]
+    - endpoints: ["AGG-SW2:et1", "IDFA-SW2:et97"]
 
 #######################
 # AGG-SW1 to IDFB-SW1 #
 #######################
 
-    - endpoints: ["AGG-SW1:et2", "IDFB-SW1:et2"]
+    - endpoints: ["AGG-SW1:et2", "IDFB-SW1:et97"]
 
 #########################
 # AGG-SW2 to IDFB-SW2   #
 #########################
 
-    - endpoints: ["AGG-SW2:et2", "IDFB-SW2:et2"]
+    - endpoints: ["AGG-SW2:et2", "IDFB-SW2:et97"]
 
 ################################
 # AGG-SW1 to IDFBasement-SW1   #
 ################################
 
-    - endpoints: ["AGG-SW1:et3", "IDFBasement-SW1:et1"]
+    - endpoints: ["AGG-SW1:et3", "IDFBasement-SW1:et49"]
 
 ###############################
 # AGG-SW2 to IDFBasement-SW1  #
 ###############################
 
-    - endpoints: ["AGG-SW2:et3", "IDFBasement-SW1:et2"]
+    - endpoints: ["AGG-SW2:et3", "IDFBasement-SW1:et50"]
 
 #######################
 # AGG-SW1 to AGG-SW2  #
 #######################
 
-    - endpoints: ["AGG-SW1:et10", "AGG-SW2:et10"]
-    - endpoints: ["AGG-SW1:et11", "AGG-SW2:et11"]
+    - endpoints: ["AGG-SW1:et37", "AGG-SW2:et37"]
+    - endpoints: ["AGG-SW1:et38", "AGG-SW2:et38"]
 
 ##########################
 #  IDFA-SW1 to IDFA-SW2  #
 ##########################
 
-    - endpoints: ["IDFA-SW1:et10", "IDFA-SW2:et10"]
-    - endpoints: ["IDFA-SW1:et11", "IDFA-SW2:et11"]
+    - endpoints: ["IDFA-SW1:et98", "IDFA-SW2:et98"]
+    - endpoints: ["IDFA-SW1:et99", "IDFA-SW2:et99"]
 
 ##########################
 #  IDFB-SW1 to IDFB-SW2  #
 ##########################
 
-    - endpoints: ["IDFB-SW1:et10", "IDFB-SW2:et10"]
-    - endpoints: ["IDFB-SW1:et11", "IDFB-SW2:et11"]
+    - endpoints: ["IDFB-SW1:et98", "IDFB-SW2:et98"]
+    - endpoints: ["IDFB-SW1:et99", "IDFB-SW2:et99"]
 
 ####################
 # HOST1            #
