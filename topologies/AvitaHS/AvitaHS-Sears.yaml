@@ -1,0 +1,249 @@
+---
+# -------------------------------------------------------------
+# Avita HS Sears Building
+# 2 Spines & 5 Leaf Pairs with MLAG
+# -------------------------------------------------------------
+
+name: AvitaHS-Sears
+prefix: ""
+
+mgmt:
+  network: mgmt
+  ipv4_subnet: 172.100.100.0/24
+
+topology:
+
+  defaults:
+    env:
+      INTFTYPE: et
+
+  kinds:
+    ceos:
+      image: ceos:4.27.3F
+    linux:
+      image: mitchv85/ohv-host
+
+  nodes:
+
+###########################################
+# Graphite Node                           #
+# Provides Topology Graphing and the     #
+# ability to connect to nodes in the      #
+# topology via a web/ssh session          #
+###########################################
+
+    graphite:
+      kind: linux
+      image: netreplica/graphite
+      mgmt_ipv4: 172.100.100.110
+      env:
+        GRAPHITE_DEFAULT_TYPE: clab
+        GRAPHITE_DEFAULT_TOPO: AvitaHS-Sears
+        # CLAB_SSH_CONNECTION: ${SSH_CONNECTION}
+      binds:
+        # - .:/var/www/localhost/htdocs/clab   <----  This is the old path in docker image netreplica/graphite:webssh2
+        - .:/htdocs/clab    # New path required for latest version
+      ports:
+        - 80:80
+      exec:
+        # - sh -c 'generate_offline_graph.sh'   # used to generate offline graphs
+        - sh -c 'graphite_motd.sh 80'
+      labels:
+        graph-hide: yes
+
+
+#########################
+# SPINE                 #
+#########################
+
+    AGG-SW1:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.101
+      startup-config: configs/AGG-SW1.cfg
+      ports:
+        - '22001:22'
+        - '8001:80'
+        - '44301:443'
+      labels:
+        graph-level: 1
+        graph-icon: switch
+
+    AGG-SW2:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.102
+      startup-config: configs/AGG-SW2.cfg
+      ports:
+        - '22002:22'
+        - '8002:80'
+        - '44302:443'
+      labels:
+        graph-level: 1
+        graph-icon: switch
+
+#########################
+# LEAF                  #
+#########################
+
+    IDFA-SW1:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.103
+      startup-config: configs/IDFA-SW1.cfg
+      ports:
+        - '22003:22'
+        - '8003:80'
+        - '44303:443'
+      labels:
+        graph-level: 2
+        graph-icon: switch
+
+    IDFA-SW2:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.104
+      startup-config: configs/IDFA-SW2.cfg
+      ports:
+        - '22004:22'
+        - '8004:80'
+        - '44304:443'
+      labels:
+      labels:
+        graph-level: 2
+        graph-icon: switch
+
+    IDFB-SW1:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.105
+      startup-config: configs/IDFB-SW1.cfg
+      ports:
+        - '22005:22'
+        - '8005:80'
+        - '44305:443'
+      labels:
+        graph-level: 2
+        graph-icon: switch
+
+    IDFB-SW2:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.106
+      startup-config: configs/IDFB-SW2.cfg
+      ports:
+        - '22006:22'
+        - '8006:80'
+        - '44306:443'
+      labels:
+        graph-level: 2
+        graph-icon: switch
+
+    IDFBasement-SW1:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.107
+      startup-config: configs/IDFBasement-SW1.cfg
+      ports:
+        - '22007:22'
+        - '8007:80'
+        - '44307:443'
+      labels:
+        graph-level: 2
+        graph-icon: switch
+
+###########################################
+# HOST                                    #
+###########################################
+
+    HOST1:
+      kind: linux
+      image: mitchv85/ohv-host
+      mgmt_ipv4: 172.100.100.108
+      ports:
+        - '22208:22'
+      exec:
+        - bash /usr/local/bin/hostnetconfig.sh -b -i 10.10.10.100/24 -g 10.10.10.1
+      labels:
+      labels:
+        graph-level: 3
+        graph-icon: host
+
+    HOST2:
+      kind: linux
+      image: mitchv85/ohv-host
+      mgmt_ipv4: 172.100.100.109
+      ports:
+        - '22209:22'
+      exec:
+        - bash /usr/local/bin/hostnetconfig.sh -b -i 10.20.20.100/24 -g 10.20.20.1
+      labels:
+        graph-level: 3
+        graph-icon: host
+
+  links:
+
+#########################
+# AGG-SW1 to IDFA-SW1   #
+#########################
+
+    - endpoints: ["AGG-SW1:et1", "IDFA-SW1:et1"]
+
+#########################
+# AGG-SW2 to IDFA-SW1   #
+#########################
+
+    - endpoints: ["AGG-SW2:et1", "IDFA-SW2:et1"]
+
+#######################
+# AGG-SW1 to IDFB-SW1 #
+#######################
+
+    - endpoints: ["AGG-SW1:et2", "IDFB-SW1:et2"]
+
+#########################
+# AGG-SW2 to IDFB-SW2   #
+#########################
+
+    - endpoints: ["AGG-SW2:et2", "IDFB-SW2:et2"]
+
+################################
+# AGG-SW1 to IDFBasement-SW1   #
+################################
+
+    - endpoints: ["AGG-SW1:et3", "IDFBasement-SW1:et1"]
+
+###############################
+# AGG-SW2 to IDFBasement-SW1  #
+###############################
+
+    - endpoints: ["AGG-SW2:et3", "IDFBasement-SW1:et2"]
+
+#######################
+# AGG-SW1 to AGG-SW2  #
+#######################
+
+    - endpoints: ["AGG-SW1:et10", "AGG-SW2:et10"]
+    - endpoints: ["AGG-SW1:et11", "AGG-SW2:et11"]
+
+##########################
+#  IDFA-SW1 to IDFA-SW2  #
+##########################
+
+    - endpoints: ["IDFA-SW1:et10", "IDFA-SW2:et10"]
+    - endpoints: ["IDFA-SW1:et11", "IDFA-SW2:et11"]
+
+##########################
+#  IDFB-SW1 to IDFB-SW2  #
+##########################
+
+    - endpoints: ["IDFB-SW1:et10", "IDFB-SW2:et10"]
+    - endpoints: ["IDFB-SW1:et11", "IDFB-SW2:et11"]
+
+####################
+# HOST1            #
+####################
+    - endpoints: ["HOST1:eth1", "IDFA-SW1:et5"]
+    - endpoints: ["HOST1:eth2", "IDFA-SW2:et5"]
+
+####################
+# HOST2            #
+####################
+    - endpoints: ["HOST2:eth1", "IDFB-SW1:et5"]
+    - endpoints: ["HOST2:eth2", "IDFB-SW2:et5"]
+                                                                  
+
+                                                  
