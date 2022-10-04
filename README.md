@@ -101,7 +101,7 @@ bash -c "$(curl -sL https://get-clab.srlinux.dev)"
 ## Step 6: Clone Example L2LS ContainerLab Topology Repo
 
 ```bash
-git clone https://github.com/PacketAnglers/containerlab.git
+git clone https://github.com/dave50b/AvitaHS-Sears.git
 ```
 
 ## Step 7: Start ContainerLab
@@ -113,7 +113,7 @@ Below is a simple L2LS Topology that is part of the repo you just cloned.
 </p>
 
 ```bash
-sudo clab deploy -t containerlab/topologies/L2LS/L2LS.yaml --reconfigure
+sudo clab deploy -t AitaHS-Sears/topologies/AvitaHS/AvitaHS-Sears.yaml --reconfigure
 ```
 
 ## Step 8: Connect to your ContainerLab
