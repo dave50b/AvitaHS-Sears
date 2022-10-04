@@ -98,6 +98,12 @@ This is a one line install script. It will detect the OS
 bash -c "$(curl -sL https://get-clab.srlinux.dev)"
 ```
 
+# download and install the latest release (may require sudo)
+
+```bash
+bash -c "$(curl -sL https://get.containerlab.dev)"
+```
+
 ## Step 6: Clone Example L2LS ContainerLab Topology Repo
 
 ```bash
