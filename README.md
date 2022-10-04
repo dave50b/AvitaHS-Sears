@@ -151,7 +151,7 @@ admin@HOSTA:~$ ping 10.20.20.100
 When you are done using your lab, run the destroy command to shutdown the lab clean up docker containers.
 
 ```bash
-sudo clab destroy -t containerlab/topologies/L2LS/L2LS.yaml
+sudo clab destroy -t AvitaHS-Sears/topologies/AvitaHS/AvitaHS-Sears.yaml
 ```
 
 ## Step 10: Shutdown VM
