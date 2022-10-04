@@ -113,7 +113,7 @@ Below is a simple L2LS Topology that is part of the repo you just cloned.
 </p>
 
 ```bash
-sudo clab deploy -t AitaHS-Sears/topologies/AvitaHS/AvitaHS-Sears.yaml --reconfigure
+sudo clab deploy -t AvitaHS-Sears/topologies/AvitaHS/AvitaHS-Sears.yaml --reconfigure
 ```
 
 ## Step 8: Connect to your ContainerLab
