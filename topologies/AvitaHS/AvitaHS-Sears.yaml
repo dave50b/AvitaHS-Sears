@@ -35,7 +35,7 @@ topology:
     graphite:
       kind: linux
       image: netreplica/graphite
-      mgmt_ipv4: 172.100.100.110
+      mgmt_ipv4: 172.100.100.111
       env:
         GRAPHITE_DEFAULT_TYPE: clab
         GRAPHITE_DEFAULT_TOPO: AvitaHS-Sears
@@ -155,7 +155,8 @@ topology:
       ports:
         - '22208:22'
       exec:
-        - bash /usr/local/bin/hostnetconfig.sh -b -i 10.10.10.100/24 -g 10.10.10.1
+        - bash /usr/local/bin/hostnetconfig.sh -b -i 10.62.41.100/24 -g 10.62.41.1
+      labels:
       labels:
         graph-level: 3
         graph-icon: host
@@ -167,7 +168,19 @@ topology:
       ports:
         - '22209:22'
       exec:
-        - bash /usr/local/bin/hostnetconfig.sh -b -i 10.20.20.100/24 -g 10.20.20.1
+        - bash /usr/local/bin/hostnetconfig.sh -b -i 10.62.42.100/24 -g 10.62.42.1
+      labels:
+        graph-level: 3
+        graph-icon: host
+
+    HOST3:
+      kind: linux
+      image: mitchv85/ohv-host
+      mgmt_ipv4: 172.100.100.110
+      ports:
+        - '22210:22'
+      exec:
+        - bash /usr/local/bin/hostnetconfig.sh -b -i 10.62.4.100/24 -g 10.62.4.1
       labels:
         graph-level: 3
         graph-icon: host
@@ -243,5 +256,9 @@ topology:
     - endpoints: ["HOST2:eth1", "IDFB-SW1:et5"]
     - endpoints: ["HOST2:eth2", "IDFB-SW2:et5"]
                                                                   
-
+####################
+# HOST3            #
+####################
+    - endpoints: ["HOST3:eth1", "IDFBasement-SW1:et5"]
+    - endpoints: ["HOST3:eth2", "IDFBasement-SW2:et5"]
                                                   
