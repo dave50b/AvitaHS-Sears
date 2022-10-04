@@ -157,7 +157,6 @@ topology:
       exec:
         - bash /usr/local/bin/hostnetconfig.sh -b -i 10.62.41.100/24 -g 10.62.41.1
       labels:
-      labels:
         graph-level: 3
         graph-icon: host
 
