@@ -98,7 +98,7 @@ This is a one line install script. It will detect the OS
 bash -c "$(curl -sL https://get-clab.srlinux.dev)"
 ```
 
-# download and install the latest release (may require sudo)
+Download and install the latest release (may require sudo)
 
 ```bash
 bash -c "$(curl -sL https://get.containerlab.dev)"
