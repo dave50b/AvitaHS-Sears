@@ -35,7 +35,7 @@ topology:
     graphite:
       kind: linux
       image: netreplica/graphite
-      mgmt_ipv4: 172.100.100.111
+      mgmt_ipv4: 172.100.100.112
       env:
         GRAPHITE_DEFAULT_TYPE: clab
         GRAPHITE_DEFAULT_TOPO: AvitaHS-Sears
@@ -53,7 +53,7 @@ topology:
 
 
 #########################
-# SPINE                 #
+# Aggretation           #
 #########################
 
     AGG-SW1:
@@ -81,7 +81,7 @@ topology:
         graph-icon: switch
 
 #########################
-# LEAF                  #
+# IDF                   #
 #########################
 
     IDFA-SW1:
@@ -144,6 +144,23 @@ topology:
         graph-level: 2
         graph-icon: switch
 
+#########################
+# Ontario               #
+#########################
+
+    Ontario-SW:
+      kind: ceos
+      mgmt_ipv4: 172.100.100.111
+      startup-config: configs/Ontario-SW.cfg
+      ports:
+        - '22011:22'
+        - '8011:80'
+        - '44311:443'
+      labels:
+        graph-level: 2
+        graph-icon: switch
+
+
 ###########################################
 # HOST                                    #
 ###########################################
@@ -185,6 +202,12 @@ topology:
         graph-icon: host
 
   links:
+
+#########################
+# AGG-SW1 to Ontario-SW #
+#########################
+
+    - endpoints: ["AGG-SW1:et48", "Ontario-SW:et1"]
 
 #########################
 # AGG-SW1 to IDFA-SW1   #
