@@ -105,7 +105,6 @@ topology:
         - '8004:80'
         - '44304:443'
       labels:
-      labels:
         graph-level: 2
         graph-icon: switch
 
