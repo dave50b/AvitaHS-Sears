@@ -208,6 +208,12 @@ topology:
 #########################
 
     - endpoints: ["AGG-SW1:et48", "Ontario-SW:et1"]
+    
+#########################
+# AGG-SW2 to Ontario-SW #
+#########################
+
+    - endpoints: ["AGG-SW2:et48", "Ontario-SW:et2"]
 
 #########################
 # AGG-SW1 to IDFA-SW1   #
